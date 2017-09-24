@@ -41,7 +41,7 @@ webpackConfig.entry = {
 
 webpackConfig.output = {
     filename: `[name].[hash:7].js`,
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, ''),
     publicPath: '',
     chunkFilename: '[name].[hash:7].js'
 };
@@ -59,7 +59,7 @@ webpackConfig.plugins = [
         dry: false
     }),
     new HtmlWebpackPlugin({
-        template: __dirname + `/index.html`,
+        template: __dirname + `/tpl/index.html`,
         hash: false,
         favicon: './src/static/favicon.ico',
         filename: 'index.html',
