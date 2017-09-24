@@ -99,7 +99,7 @@ class Header extends React.Component {
                 <div className="baseContainer clearfix">
                     <h1 className="logo">
                         <Link to="/"><img
-                            src={scroll ? "../../../../assets/images/logo2.png" : "../../../../assets/images/logo.png"}
+                            src={scroll ? "src/assets/images/logo2.png" : "src/assets/images/logo.png"}
                             alt="logo"/></Link>
                     </h1>
                     <nav className="main_nav clearfix">

@@ -9,7 +9,7 @@ var proxy = require('http-proxy-middleware')
 
 new WebpackDevServer(webpack(config), {
 
-    contentBase: './src',
+    contentBase: __dirname,
     inline:true,
     hot: true,
     compress: true,
