@@ -8,7 +8,7 @@ export const Footer = ()=>(
     <footer className="footer">
         <Row className="baseContainer">
             <Col xs={24} sm={12} md={8} lg={6} xl={6}>
-                <img src="../../../../assets/images/logo.png" alt="zyn"/>
+                <img src="src/assets/images/logo.png" alt="zyn"/>
                 <p>Crazyn Dandelion</p>
             </Col>
             <Col xs={12} sm={6} md={8} lg={8} xl={8}>
