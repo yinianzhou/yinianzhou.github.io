@@ -6,8 +6,11 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-const nodeEnv = process.env.NODE_ENV || 'development';
-const __PROD__ = nodeEnv === 'production';
+var nodeEnv = process.env.NODE_ENV.trim() || 'development';
+var __PROD__ = nodeEnv === 'production';
+console.log('环境',process.env.NODE_ENV)
+console.log('nodeEnv',nodeEnv)
+console.log('production' == nodeEnv)
 console.log("当前运行环境：", nodeEnv === 'production' ? '生产' : '开发');
 
 const webpackConfig = {
@@ -22,7 +25,15 @@ const webpackConfig = {
             'node_modules'
         ]
     },
-    module: {}
+    module: {},
+    // devServer: {
+    //     contentBase: path.join(__dirname, ""),
+    //     compress: true,
+    //     port: 8000,
+    //     host: '0.0.0.0',
+    //     hot: true,
+    //     disableHostCheck: true
+    // }
 };
 const APP_ENTRY_PATHS = [
     'babel-polyfill',
