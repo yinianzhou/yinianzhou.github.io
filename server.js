@@ -2,6 +2,7 @@
  * Created by ZhouYinian on 2017/9/7.
  */
 var webpack = require('webpack');
+var path = require('path');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config');
 
@@ -9,7 +10,7 @@ var proxy = require('http-proxy-middleware')
 
 new WebpackDevServer(webpack(config), {
 
-    contentBase: __dirname,
+    contentBase: path.join(__dirname, ""),
     inline:true,
     hot: true,
     compress: true,

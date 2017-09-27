@@ -8,6 +8,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const __PROD__ = nodeEnv === 'production';
+
 console.log("当前运行环境：", nodeEnv === 'production' ? '生产' : '开发');
 
 const webpackConfig = {
@@ -22,7 +23,15 @@ const webpackConfig = {
             'node_modules'
         ]
     },
-    module: {}
+    module: {},
+    // devServer: {
+    //     contentBase: path.join(__dirname, ""),
+    //     compress: true,
+    //     port: 8000,
+    //     host: '0.0.0.0',
+    //     hot: true,
+    //     disableHostCheck: true
+    // }
 };
 const APP_ENTRY_PATHS = [
     'babel-polyfill',
@@ -41,7 +50,7 @@ webpackConfig.entry = {
 
 webpackConfig.output = {
     filename: `[name].[hash:7].js`,
-    path: path.join(__dirname, ''),
+    path: path.join(__dirname, './dist'),
     publicPath: '',
     chunkFilename: '[name].[hash:7].js'
 };
@@ -110,7 +119,7 @@ webpackConfig.module.rules = [
         use: ["style-loader", "css-loader", "postcss-loader", "less-loader"]
     }, {
         test: /\.(png|jpg|gif|md)$/,
-        use: ['file-loader?limit=10000&name=[md5:hash:base64:10].[ext]']
+        use: ['url-loader?limit=10000&name=images/[md5:hash:base64:10].[ext]']
     }, {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         use: ['url-loader?limit=10000&mimetype=image/svg+xml']
