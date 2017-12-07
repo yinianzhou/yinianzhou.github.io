@@ -1,16 +1,16 @@
 {
   "presets": [
     [
-      "es2015",
+      "env",
       {
         "modules": false
       }
-    ],
-    "react",
-    "stage-0"
+    ],"react","stage-0"
   ],
+  "comments": false,// 忽略注释
   "plugins": [
-    "transform-decorators-legacy",
+    "transform-object-rest-spread",// 对象展开符 
+    "transform-decorators-legacy",//装饰模式插件
     [
       "import", {"libraryName": "antd", "style": true}
     ]

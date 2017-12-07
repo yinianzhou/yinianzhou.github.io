@@ -6,17 +6,15 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-var nodeEnv = process.env.NODE_ENV.trim() || 'development';
-var __PROD__ = nodeEnv === 'production';
-console.log('环境',process.env.NODE_ENV)
-console.log('nodeEnv',nodeEnv)
-console.log('production' == nodeEnv)
-console.log("当前运行环境：", nodeEnv === 'production' ? '生产' : '开发');
+//判断当前环境  配合cross-env
+const env = process.env.NODE_ENV || 'development';
+const debug = env !== 'production'
 
-const webpackConfig = {
+
+const webpack_conf = {
     name: 'client',
     target: 'web',
-    devtool: __PROD__ ? 'source-map' : 'inline-source-map',
+    devtool: debug ? 'cheap-module-source-map' : '',
 
     resolve: {
         extensions: ['.js', '.jsx', '.less', '.scss', '.css'],
@@ -26,20 +24,13 @@ const webpackConfig = {
         ]
     },
     module: {},
-    // devServer: {
-    //     contentBase: path.join(__dirname, ""),
-    //     compress: true,
-    //     port: 8000,
-    //     host: '0.0.0.0',
-    //     hot: true,
-    //     disableHostCheck: true
-    // }
 };
+
 const APP_ENTRY_PATHS = [
     'babel-polyfill',
     './src/main.js'
 ];
-webpackConfig.entry = {
+webpack_conf.entry = {
     app: APP_ENTRY_PATHS,
     vendor: [
         'react',
@@ -50,64 +41,66 @@ webpackConfig.entry = {
     ]
 };
 
-webpackConfig.output = {
-    filename: `[name].[hash:7].js`,
-    path: path.join(__dirname, ''),
-    publicPath: '',
-    chunkFilename: '[name].[hash:7].js'
+webpack_conf.output = {
+    path: path.join(__dirname, 'dist'),
+    publicPath: '/',
+    filename: debug? '[name].js':'[hash:8].[name].js',
+    chunkFilename: debug? '[name].js':'[name].[chunkhash].js',
 };
 
-webpackConfig.plugins = [
+webpack_conf.plugins = [
+    new webpack.DefinePlugin({
+        "process.env":{
+            NODE_ENV:JSON.stringify(env)
+        }
+    }),
     new webpack.optimize.CommonsChunkPlugin({
-        // vendor 的意义和之前相同
-        // manifest文件是将每次打包都会更改的东西单独提取出来，保证没有更改的代码无需重新打包，这样可以加快打包速度
-        names: ['vendor', 'manifest'],
-        // 配合 manifest 文件使用
+        names: ['vander', 'manifest'],
         minChunks: Infinity
     }),
-    new CleanWebpackPlugin(['./vendor.*.js','./app.*.js','./manifest.*.js'], {
+    new CleanWebpackPlugin([`./dist/*.js`], {
         verbose: true,
         dry: false
     }),
+
     new HtmlWebpackPlugin({
-        template: __dirname + `/tpl/index.html`,
+        template: path.join(__dirname + `/src/index.html`),
         hash: false,
-        favicon: './src/static/favicon.ico',
+        favicon: path.join(__dirname,'/src/assets/images/favicon.ico'),
         filename: 'index.html',
-        inject: 'body',
         minify: {
             collapseWhitespace: true
         }
     }),
-    new webpack.DefinePlugin({
-        'process.env': {
-            'NODE_ENV': JSON.stringify(nodeEnv)
-        }
-    }),
+
 ];
 
 
-if (__PROD__) {
-    webpackConfig.plugins.push(
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                unused: true,
-                dead_code: true,
-                warnings: false
-            }
-        })
-    )
-
-} else {
-    webpackConfig.plugins.push(
+if(debug){
+    webpack_conf.plugins.push(
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin()
     )
+
+    webpack_conf.devServer={
+        contentBase: path.join(__dirname, 'src'),
+        port: 8000,
+        host: 'localhost',
+        historyApiFallback: true,
+        inline: true,
+        hot: true,
+        watchOptions: {
+          aggregateTimeout: 300,
+          poll: 1000
+        }
+    }
+}else{
+    webpack_conf.plugins.push(
+        new webpack.optimize.UglifyJsPlugin()
+    )
 }
 
-webpackConfig.module.rules = [
+webpack_conf.module.rules = [
     {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -128,4 +121,4 @@ webpackConfig.module.rules = [
     }
 ];
 
-module.exports = webpackConfig;
+module.exports = webpack_conf;
