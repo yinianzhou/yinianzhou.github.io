@@ -1,13 +1,12 @@
 ## Welcome to zhouyinianPages
 
+### 下载项目
+- git clone git@github.com:yinianzhou/yinianzhou.github.io.git
+- npm install 
 
-### 本地开发
 
-- npm run start
+### 本地预览
+- npm run dev 
 
-### 上线
-- webpack -p 上传dist 目录
 
-1. react
-2. redux
 
