@@ -19,7 +19,6 @@ export default class About extends React.Component {
     render() {
         return (
             <div>
-                <Header/>
                 <div className="carousel">
                     <Carousel effect="fade" autoplay easing="ease-in-out" autoplaySpeed="5000" speed="500">
                         <div className="banner_item" style={{backgroundImage:`url(../../../assets/images/banner_house.jpg)`}}><h3>1</h3></div>

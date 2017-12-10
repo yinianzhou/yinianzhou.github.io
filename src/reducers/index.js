@@ -2,7 +2,7 @@
  * Created by ZhouYinian on 2017/9/6.
  */
 import {combineReducers} from 'redux';
-import{cssText} from '../routes/Home/modules/reducer'
+import{cssText} from '../pages/Home/modules/reducer'
 const makeRootReducer = combineReducers({
     cssText
 });

@@ -7,7 +7,7 @@ import {Banner} from './Banner';
 import CardShow from './CardShow';
 import CardRead from './CardRead'
 import '../assets/Home.less'
-@HOCComponent('home')
+// @HOCComponent('home')
 class Home extends React.Component {
     constructor(props) {
         super(props);
