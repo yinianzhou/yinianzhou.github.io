@@ -15,12 +15,12 @@ export function fadeIn(el) {
     }
     tick()
 }
-
+/* 判断是否是数组 */
 export const _isArray = Array.isArray || function (obj) {
         return Object.prototype.call(obj) === '[object Array]';
     };
 
-
+/* 节流函数 */
 export function _throttle(fn, delay, mustDelay) {
     var timer = null;
     var star_time;

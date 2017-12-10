@@ -15,7 +15,7 @@ const NotFound = ()=>(
 
 import Home from './Home/index';
 import About from './About/index'
-
+import Header from '../components/Header/index'
 let routes = (
     <Switch>
         <Route exact path="/" component={Home}/>

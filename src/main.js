@@ -4,7 +4,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {Router} from 'react-router-dom'
+import {Router} from 'react-router-dom';// 引入router ,同步history 和 store
 
 import createBrowserHistory from 'history/createBrowserHistory'
 const history = createBrowserHistory();

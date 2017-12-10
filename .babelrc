@@ -9,6 +9,7 @@
   ],
   "comments": false,// 忽略注释
   "plugins": [
+    "syntax-dynamic-import",// 解析import 语法 ，用于懒加载
     "transform-object-rest-spread",// 对象展开符 
     "transform-decorators-legacy",//装饰模式插件
     [
