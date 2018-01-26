@@ -13,6 +13,9 @@ class Home extends React.Component {
         super(props);
         this.state = {}
     }
+    componentWillMount(){
+        console.log('componentWillMount')
+    }
 
     componentDidMount() {
         this.props.showText('周奕年123hotfix111')
@@ -20,6 +23,7 @@ class Home extends React.Component {
     }
 
     render() {
+        console.log('render')
         console.log('csstext', this.props.CssText)
         return (
             <div>

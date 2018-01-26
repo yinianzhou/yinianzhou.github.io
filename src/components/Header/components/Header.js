@@ -26,7 +26,6 @@ class Header extends React.Component {
         this.showCollapse = this.showCollapse.bind(this);
         this.getScrollTop = this.getScrollTop.bind(this);
         this.windowOnScroll = this.windowOnScroll.bind(this);
-        this.throttle = this.throttle.bind(this)
 
     }
 
@@ -36,26 +35,6 @@ class Header extends React.Component {
                 scroll: true
             });
         document.addEventListener('scroll', _throttle(this.windowOnScroll,100,100))
-    }
-
-    throttle(fn, delay, mustDelay) {
-        let timer = null;
-        let star_time;
-        return function () {
-            let context = this, args = arguments, curr_time = +new Date();
-            clearTimeout(timer);
-            if (!star_time) {
-                star_time = curr_time
-            }
-            if (curr_time - star_time >= mustDelay) {
-                fn.apply(context, args);
-                star_time = curr_time
-            } else {
-                timer = setTimeout(function () {
-                    fn.apply(context, args);
-                }, delay);
-            }
-        }
     }
 
     getScrollTop() {

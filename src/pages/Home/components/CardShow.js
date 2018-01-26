@@ -16,7 +16,7 @@ class CardShow extends React.Component {
                 <Row gutter={30}>
                     <Col xs={12} lg={6}>
                         <div className="card" style={{background:'#f2b535'}}>
-
+                            <div></div>
                             <i className="light"/>
                         </div>
                     </Col>

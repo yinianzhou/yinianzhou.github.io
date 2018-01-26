@@ -22,7 +22,6 @@ export default class About extends React.Component {
                 <div>
                     about
                 </div>
-
             </div>
         )
     }
